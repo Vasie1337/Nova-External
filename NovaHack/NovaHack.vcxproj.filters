@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Hack">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Hack\Private">
+      <UniqueIdentifier>{9f813e28-3078-42b7-a30a-a298e27b65a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hack\Public">
+      <UniqueIdentifier>{7faa85d8-6789-4d7e-94d0-f9872ca8e0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlay">
+      <UniqueIdentifier>{fedecf2c-f103-444e-967a-438e68b24b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlay\Public">
+      <UniqueIdentifier>{46915d94-d4aa-4086-86f1-a207b4ec8926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlay\Private">
+      <UniqueIdentifier>{c11b64ce-5fd0-4949-89ef-a4deefcc0cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{db5620a8-dd7f-48c6-af72-9b0ed3ddd628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs\Public">
+      <UniqueIdentifier>{4f8e841a-b5ea-48f2-ba30-f359b384bbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs\Private">
+      <UniqueIdentifier>{5c3adf7e-cc61-4dd2-a15f-e57d9343fd4d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NovaHack.cpp" />
+    <ClCompile Include="Hack\Private\aim.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack\Private\engine.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack\Private\esp.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack\Private\exploits.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack\Private\hack.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack\Private\memory.cpp">
+      <Filter>Hack\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_demo.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_draw.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_impl_dx9.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_impl_win32.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_tables.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Libs\Private\imgui_widgets.cpp">
+      <Filter>Libs\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Overlay\Private\menu.cpp">
+      <Filter>Overlay\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Overlay\Private\render.cpp">
+      <Filter>Overlay\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hack\Public\aim.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\cache.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\cfg.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\engine.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\esp.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\exploits.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\hack.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\memory.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack\Public\offsets.h">
+      <Filter>Hack\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imconfig.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imgui.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imgui_impl_dx9.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imgui_impl_win32.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imgui_internal.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imstb_rectpack.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imstb_textedit.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Public\imstb_truetype.h">
+      <Filter>Libs\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\Public\data.h">
+      <Filter>Overlay\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\Public\menu.h">
+      <Filter>Overlay\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\Public\render.h">
+      <Filter>Overlay\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
