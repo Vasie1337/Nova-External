@@ -1,39 +1,33 @@
 #include "../Public/aim.h"
-
-inline void aim::MoveMouse(int deltaX, int deltaY)
-{
-    INPUT input;
-    input.type = INPUT_MOUSE;
-    input.mi.dx = deltaX;
-    input.mi.dy = deltaY;
-    input.mi.dwFlags = MOUSEEVENTF_MOVE;
-    SendInput(1, &input, sizeof(INPUT));
-}
+#include "../Public/memory.h"
 
 bool aim::Tick()
 {
-    if (!GetAsyncKeyState(VK_RBUTTON) || !cfg::Aimbot)
+    float ViewPitchMin = -89.9999f;
+    float ViewPitchMax = 89.9999f;
+    float ViewYawMin = 0.0000f;
+    float ViewYawMax = 359.9999f;
+
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2454, ViewPitchMin);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2458, ViewPitchMax);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x245c, ViewYawMin);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2460, ViewYawMax);
+
+    if (!GetAsyncKeyState(VK_RBUTTON) || !cfg::Aimbot || !cache::AimData.ClosestFovDistance)
         return false;
 
-    float x = cache::AimData.ClosestAimPos2D.x;
-    float y = cache::AimData.ClosestAimPos2D.y;
+    engine::vec3 VectorPos = cache::AimData.ClosestAimPos3D - cache::LocalCamera.Location;
 
-    float TargetX = 0;
-    if (x != 0) {
-        TargetX = (x > engine::ScreenCenter.x) ? -(engine::ScreenCenter.x - x) : x - engine::ScreenCenter.x;
-        TargetX /= cfg::AimSmoothness;
-        if ((TargetX + engine::ScreenCenter.x) > (engine::ScreenCenter.x * 2.f) || (TargetX + engine::ScreenCenter.x) < 0)
-            TargetX = 0;
-    }
+    float distance = (double)(sqrtf(VectorPos.x * VectorPos.x + VectorPos.y * VectorPos.y + VectorPos.z * VectorPos.z));
+    float x, y, z;
+    x = -((acosf(VectorPos.z / distance) * (float)(180.0f / engine::M_PI)) - 90.f);
+    y = atan2f(VectorPos.y, VectorPos.x) * (float)(180.0f / engine::M_PI);
+    z = 0;
 
-    float TargetY = 0;
-    if (y != 0) {
-        TargetY = (y > engine::ScreenCenter.y) ? -(engine::ScreenCenter.y - y) : y - engine::ScreenCenter.y;
-        TargetY /= cfg::AimSmoothness;
-        if ((TargetY + engine::ScreenCenter.y) > (engine::ScreenCenter.y * 2.f) || (TargetY + engine::ScreenCenter.y) < 0)
-            TargetY = 0;
-    }
 
-    MoveMouse(static_cast<int>(TargetX), static_cast<int>(TargetY));
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2454, x);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2458, x);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x245c, y);
+    memory::WriteMemory<float>(cache::PlayerCameraManager + 0x2460, y);
     return true;
 }

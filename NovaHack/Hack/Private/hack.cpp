@@ -95,6 +95,7 @@ bool hack::Tick()
 
     cache::AimData.ClosestFovDistance = FLT_MAX;
     cache::AimData.ClosestAimPos2D = { 0.f, 0.f };
+    cache::AimData.ClosestAimPos3D = { 0.f, 0.f, 0.f };
 
     for (int i = 0; i < cache::PlayerCount; i++)
     {
@@ -137,6 +138,7 @@ bool hack::Tick()
             {
                 cache::AimData.ClosestFovDistance = FovDistance;
                 cache::AimData.ClosestAimPos2D = AimPos2D;
+                cache::AimData.ClosestAimPos3D = AimPos3D;
             }
         }
         engine::drawdata Data{ RootPos2D, HeadPos2D, FootPos2D, WorldDistance, FovDistance, Mesh };

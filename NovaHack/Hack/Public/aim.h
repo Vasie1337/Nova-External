@@ -9,8 +9,6 @@
 
 class aim
 {
-    inline static void MoveMouse(int deltaX, int deltaY);
-
 public:
     static bool Tick();
 };
