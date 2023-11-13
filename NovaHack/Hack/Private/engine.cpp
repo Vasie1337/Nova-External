@@ -53,10 +53,8 @@ bool engine::WorldToScreen(vec3 WorldLocation, camera LocalCamera, vec2* OutPos)
     if (vTransformed.z < 1.f)
         vTransformed.z = 1.f;
 
-    float FovAngle = 80.f;
-
-    OutPos->x = engine::ScreenCenter.x + vTransformed.x * (engine::ScreenCenter.x / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.z;
-    OutPos->y = engine::ScreenCenter.y - vTransformed.y * (engine::ScreenCenter.x / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.z;
+    OutPos->x = engine::ScreenCenter.x + vTransformed.x * (engine::ScreenCenter.x / tanf(LocalCamera.FOV * (float)M_PI / 360.f)) / vTransformed.z;
+    OutPos->y = engine::ScreenCenter.y - vTransformed.y * (engine::ScreenCenter.x / tanf(LocalCamera.FOV * (float)M_PI / 360.f)) / vTransformed.z;
 
     return true;
 }

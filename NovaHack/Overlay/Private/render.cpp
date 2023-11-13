@@ -143,19 +143,21 @@ bool render::Loop()
             2.f
         );
 
-        ImGui::GetForegroundDrawList()->AddLine(
-            ImVec2(engine::Screen.x / 2.f - cfg::CrosshairLength, engine::Screen.y / 2.f),
-            ImVec2(engine::Screen.x / 2.f + cfg::CrosshairLength, engine::Screen.y / 2.f),
-            ImColor(51, 214, 255, 255),
-            2.f
-        );
+        if (cfg::Crosshair) {
+            ImGui::GetForegroundDrawList()->AddLine(
+                ImVec2(engine::Screen.x / 2.f - cfg::CrosshairLength, engine::Screen.y / 2.f),
+                ImVec2(engine::Screen.x / 2.f + cfg::CrosshairLength, engine::Screen.y / 2.f),
+                ImColor(51, 214, 255, 255),
+                2.f
+            );
 
-        ImGui::GetForegroundDrawList()->AddLine(
-            ImVec2(engine::Screen.x / 2.f, engine::Screen.y / 2.f - cfg::CrosshairLength),
-            ImVec2(engine::Screen.x / 2.f, engine::Screen.y / 2.f + cfg::CrosshairLength),
-            ImColor(51, 214, 255, 255),
-            2.f
-        );
+            ImGui::GetForegroundDrawList()->AddLine(
+                ImVec2(engine::Screen.x / 2.f, engine::Screen.y / 2.f - cfg::CrosshairLength),
+                ImVec2(engine::Screen.x / 2.f, engine::Screen.y / 2.f + cfg::CrosshairLength),
+                ImColor(51, 214, 255, 255),
+                2.f
+            );
+        }
 
         if (ShowMenu) {
             ImGui::GetForegroundDrawList()->AddCircleFilled(

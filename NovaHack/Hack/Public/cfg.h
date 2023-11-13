@@ -24,6 +24,9 @@ public:
 	inline static bool NoRecoil = true;
 	inline static bool NoSpread = true;
 	inline static bool ADSAir = true;
+	inline static bool Spinbot = false;
+	inline static bool InstaRevive = true;
+	inline static bool Airstuck = true;
 
 	inline static bool ChangeWeaponMesh = false;
 	inline static bool ChangePlayerMesh = false;

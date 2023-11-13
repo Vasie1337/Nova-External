@@ -98,12 +98,15 @@ bool menu::RenderMenu()
 
 		if (ImGui::BeginTabItem("Exploits"))
 		{
-			WindowSize = { 400.f, 300.f };
+			WindowSize = { 400.f, 370.f };
 
 			ImGui::Checkbox("Rapid Fire", &cfg::RapidFire);
 			ImGui::Checkbox("No Recoil", &cfg::NoRecoil);
 			ImGui::Checkbox("No Spread", &cfg::NoSpread);
 			ImGui::Checkbox("ADS in Air", &cfg::ADSAir);
+			ImGui::Checkbox("Spinbot", &cfg::Spinbot);
+			ImGui::Checkbox("InstaRevive", &cfg::InstaRevive);
+			ImGui::Checkbox("Airstuck", &cfg::Airstuck);
 
 			ImGui::Checkbox("Change Weapon Mesh", &cfg::ChangeWeaponMesh);
 			ImGui::SliderFloat("Weapon Mesh Scale", &cfg::WeaponMeshScale, 0.1f, 10.f);
