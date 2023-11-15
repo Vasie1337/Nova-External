@@ -91,7 +91,6 @@ bool menu::RenderMenu()
 
 			ImGui::Checkbox("AimBot", &cfg::Aimbot);
 			ImGui::SliderFloat("AimBot FOV", &cfg::AimBotFOV, 1.f, 200.f);
-			ImGui::SliderFloat("AimBot Smoothness", &cfg::AimSmoothness, 0.f, 10.f);
 
 			ImGui::EndTabItem();
 		}

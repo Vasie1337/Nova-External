@@ -30,10 +30,20 @@ bool esp::Tick()
             Color = ImColor(0, 255, 0, 255);
         }
 
+        engine::vec3 HeadPos3D = Data.RootPos3D + engine::vec3(0.f, 0.f, 90.f);
+        engine::vec3 FootPos3D = Data.RootPos3D - engine::vec3(0.f, 0.f, 90.f);
+        engine::vec3 AimPos3D = Data.RootPos3D + engine::vec3(0.f, 0.f, 60.f);
+
+        engine::vec2 HeadPos2D{};
+        engine::vec2 FootPos2D{};
+
+        if (!engine::WorldToScreen(HeadPos3D, cache::LocalCamera, &HeadPos2D)) continue;
+        if (!engine::WorldToScreen(FootPos3D, cache::LocalCamera, &FootPos2D)) continue;
+
         if (cfg::Snaplines) { // snaplines
             Draw->AddLine
             (
-                ImVec2(Data.FootPos2D.x, Data.FootPos2D.y),
+                ImVec2(FootPos2D.x, FootPos2D.y),
                 ImVec2(engine::ScreenCenter.x, engine::ScreenCenter.y),
                 Color,
                 2.f
@@ -41,12 +51,12 @@ bool esp::Tick()
         }
 
         if (cfg::EspBox) { // espboxes
-            float Width = (Data.HeadPos2D.y - Data.FootPos2D.y) * 0.20f;
+            float Width = (HeadPos2D.y - FootPos2D.y) * 0.20f;
 
             Draw->AddRect
             (
-                ImVec2(Data.HeadPos2D.x - Width, Data.HeadPos2D.y),
-                ImVec2(Data.FootPos2D.x + Width, Data.FootPos2D.y),
+                ImVec2(HeadPos2D.x - Width, HeadPos2D.y),
+                ImVec2(FootPos2D.x + Width, FootPos2D.y),
                 Color,
                 0.f,
                 0,
@@ -55,7 +65,7 @@ bool esp::Tick()
         }
 
         if (cfg::ShowDistance) {
-            Draw->AddText({ Data.FootPos2D.x, Data.FootPos2D.y }, Color, std::string(std::to_string(Data.WorldDistance / 100) + 'm').c_str());
+            Draw->AddText({ FootPos2D.x, FootPos2D.y }, Color, std::string(std::to_string(Data.WorldDistance / 100) + 'm').c_str());
         }
     }
 

@@ -133,9 +133,7 @@ public:
         float FOV{};
     };
     struct drawdata {
-        engine::vec2 RootPos2D{};
-        engine::vec2 HeadPos2D{};
-        engine::vec2 FootPos2D{};
+        engine::vec3 RootPos3D{};
 
         int WorldDistance{};
         float FovDistance{};
@@ -143,7 +141,6 @@ public:
         uintptr_t Mesh{};
     };
     struct aimdata {
-        engine::vec2 ClosestAimPos2D{};
         engine::vec3 ClosestAimPos3D{};
         float ClosestFovDistance{};
     };

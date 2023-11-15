@@ -1,22 +1,20 @@
 #pragma once
 
-
 class cfg
 {
 public:
 	// visuals
 	inline static bool EspBox = true;
-	inline static bool Snaplines = true;
+	inline static bool Snaplines = false;
 	inline static bool ShowDistance = true;
 
 	inline static bool Crosshair = true;
-	inline static float CrosshairLength = 15.f;
+	inline static float CrosshairLength = 20.f;
 
 	// aim
 	inline static bool Aimbot = true;
 
 	inline static float AimBotFOV = 200.f;
-	inline static float AimSmoothness = 3.f;
 
 	// exploits
     inline static bool Exploits = true;

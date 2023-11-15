@@ -30,7 +30,13 @@ bool hack::Attach()
     if (!memory::GameBase) return false;
 
     return true;
+}void printBits(unsigned char value) {
+    for (int i = 7; i >= 0; --i) {
+        std::cout << ((value >> i) & 1);
+    }
+    std::cout << std::endl;
 }
+
 
 bool hack::Tick()
 {
@@ -94,7 +100,6 @@ bool hack::Tick()
     cache::LocalCamera = GetCamera(cache::LocalRotation);
 
     cache::AimData.ClosestFovDistance = FLT_MAX;
-    cache::AimData.ClosestAimPos2D = { 0.f, 0.f };
     cache::AimData.ClosestAimPos3D = { 0.f, 0.f, 0.f };
 
     for (int i = 0; i < cache::PlayerCount; i++)
@@ -105,43 +110,36 @@ bool hack::Tick()
         uintptr_t PawnPrivate = memory::ReadMemory<uintptr_t>(PlayerState + offsets::PawnPrivate);
         if (!PawnPrivate) continue;
 
-        engine::uint8 TeamIndex = memory::ReadMemory<engine::uint8>(PlayerState + 0xDA8);
+        engine::uint8 TeamIndex = memory::ReadMemory<engine::uint8>(PlayerState + offsets::TeamIndex);
         if (PawnPrivate == cache::AcknowledgedPawn || TeamIndex == cache::TeamIndex) continue;
 
         uintptr_t Mesh = memory::ReadMemory<uintptr_t>(PawnPrivate + offsets::Mesh);
         if (!Mesh) continue;
 
+        unsigned char buffer = memory::ReadMemory<unsigned char>(PlayerState + 0x35E);
+        
+        printBits(buffer);
+
         uintptr_t RootComponent = memory::ReadMemory<uintptr_t>(PawnPrivate + offsets::RootComponent);
         if (!RootComponent) continue;
 
         engine::vec3 RootPos3D = memory::ReadMemory<engine::vec3>(RootComponent + offsets::RelativeLocation);
-        engine::vec3 HeadPos3D = RootPos3D + engine::vec3(0.f, 0.f, 90.f);
-        engine::vec3 FootPos3D = RootPos3D - engine::vec3(0.f, 0.f, 90.f);
-        engine::vec3 AimPos3D = RootPos3D + engine::vec3(0.f, 0.f, 60.f);
-
         engine::vec2 RootPos2D{};
-        engine::vec2 HeadPos2D{};
-        engine::vec2 FootPos2D{};
-        engine::vec2 AimPos2D{};
 
         if (!engine::WorldToScreen(RootPos3D, cache::LocalCamera, &RootPos2D)) continue;
-        if (!engine::WorldToScreen(HeadPos3D, cache::LocalCamera, &HeadPos2D)) continue;
-        if (!engine::WorldToScreen(FootPos3D, cache::LocalCamera, &FootPos2D)) continue;
-        if (!engine::WorldToScreen(AimPos3D, cache::LocalCamera, &AimPos2D)) continue;
 
-        int WorldDistance = HeadPos3D.DistanceInt(cache::LocalLocation);
-        float FovDistance = HeadPos2D.Distance(engine::ScreenCenter);
+        int WorldDistance = RootPos3D.DistanceInt(cache::LocalLocation);
+        float FovDistance = RootPos2D.Distance(engine::ScreenCenter);
 
         if (FovDistance < cfg::AimBotFOV)
         {
             if (FovDistance < cache::AimData.ClosestFovDistance)
             {
                 cache::AimData.ClosestFovDistance = FovDistance;
-                cache::AimData.ClosestAimPos2D = AimPos2D;
-                cache::AimData.ClosestAimPos3D = AimPos3D;
+                cache::AimData.ClosestAimPos3D = RootPos3D + engine::vec3(0.f, 0.f, 55.f);
             }
         }
-        engine::drawdata Data{ RootPos2D, HeadPos2D, FootPos2D, WorldDistance, FovDistance, Mesh };
+        engine::drawdata Data{ RootPos3D, WorldDistance, FovDistance, Mesh };
         cache::EspDataArray.push_back(Data);
     }
     aim::Tick();

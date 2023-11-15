@@ -87,9 +87,11 @@ bool render::CreateOverlay()
 
 bool render::Loop()
 {
+    constexpr std::chrono::milliseconds SleepTime(1);
+
     while (Running)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::sleep_for(SleepTime);
 
         if (PeekMessage(&message, overlay_hwnd, 0, 0, PM_REMOVE))
         {
@@ -97,12 +99,17 @@ bool render::Loop()
             DispatchMessage(&message);
         }
 
-        if (message.message == WM_QUIT) Running = false;
+        if (message.message == WM_QUIT)
+            Running = false;
 
-        if (GetAsyncKeyState(VK_INSERT) & 0x01) ShowMenu = !ShowMenu;
-        if (GetAsyncKeyState(VK_END) & 0x01) Running = false;
+        if (GetAsyncKeyState(VK_INSERT) & 0x01)
+            ShowMenu = !ShowMenu;
 
-        if (!Running) break;
+        if (GetAsyncKeyState(VK_END) & 0x01)
+            Running = false;
+
+        if (!Running)
+            break;
 
         HWND foreground_window = GetForegroundWindow();
         HWND prev_window = GetWindow(foreground_window, GW_HWNDPREV);
@@ -113,21 +120,13 @@ bool render::Loop()
         ImGuiIO& io = ImGui::GetIO();
         io.DeltaTime = 1.0f / 60.0f;
 
-        POINT p{};
+        POINT p;
         GetCursorPos(&p);
 
         io.MousePos.x = static_cast<float>(p.x);
         io.MousePos.y = static_cast<float>(p.y);
 
-        if (GetAsyncKeyState(0x1)) {
-            io.MouseDown[0] = true;
-            io.MouseClicked[0] = true;
-            io.MouseClickedPos[0].x = io.MousePos.x;
-            io.MouseClickedPos[0].x = io.MousePos.y;
-        }
-        else {
-            io.MouseDown[0] = false;
-        }
+        io.MouseDown[0] = (GetAsyncKeyState(0x1) & 0x8000) != 0;
 
         ImGui_ImplDX9_NewFrame();
         ImGui_ImplWin32_NewFrame();
@@ -143,7 +142,8 @@ bool render::Loop()
             2.f
         );
 
-        if (cfg::Crosshair) {
+        if (cfg::Crosshair)
+        {
             ImGui::GetForegroundDrawList()->AddLine(
                 ImVec2(engine::Screen.x / 2.f - cfg::CrosshairLength, engine::Screen.y / 2.f),
                 ImVec2(engine::Screen.x / 2.f + cfg::CrosshairLength, engine::Screen.y / 2.f),
@@ -159,7 +159,8 @@ bool render::Loop()
             );
         }
 
-        if (ShowMenu) {
+        if (ShowMenu)
+        {
             ImGui::GetForegroundDrawList()->AddCircleFilled(
                 ImVec2(io.MousePos.x, io.MousePos.y),
                 5.f,
@@ -200,10 +201,12 @@ bool render::Loop()
         device->EndScene();
         device->Release();
     }
+
     if (object != NULL)
     {
         object->Release();
     }
+
     DestroyWindow(overlay_hwnd);
 
     return true;
