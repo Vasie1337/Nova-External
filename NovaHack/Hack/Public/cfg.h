@@ -17,13 +17,14 @@ public:
 	inline static float AimBotFOV = 200.f;
 
 	// exploits
-    inline static bool Exploits = true;
+	inline static bool Exploits = true;
 	inline static bool RapidFire = true;
 	inline static bool NoRecoil = true;
 	inline static bool NoSpread = true;
 	inline static bool ADSAir = true;
 	inline static bool Spinbot = false;
 	inline static bool InstaRevive = true;
+	inline static bool fakelag = true;
 	inline static bool Airstuck = true;
 
 	inline static bool ChangeWeaponMesh = false;
@@ -32,4 +33,3 @@ public:
 	inline static float WeaponMeshScale = 1.f;
 	inline static float PlayerMeshScale = 1.f;
 };
-
