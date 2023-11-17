@@ -30,13 +30,7 @@ bool hack::Attach()
     if (!memory::GameBase) return false;
 
     return true;
-}void printBits(unsigned char value) {
-    for (int i = 7; i >= 0; --i) {
-        std::cout << ((value >> i) & 1);
-    }
-    std::cout << std::endl;
 }
-
 
 bool hack::Tick()
 {
@@ -115,10 +109,6 @@ bool hack::Tick()
 
         uintptr_t Mesh = memory::ReadMemory<uintptr_t>(PawnPrivate + offsets::Mesh);
         if (!Mesh) continue;
-
-        unsigned char buffer = memory::ReadMemory<unsigned char>(PlayerState + 0x35E);
-        
-        printBits(buffer);
 
         uintptr_t RootComponent = memory::ReadMemory<uintptr_t>(PawnPrivate + offsets::RootComponent);
         if (!RootComponent) continue;

@@ -74,7 +74,7 @@ bool menu::RenderMenu()
 	{
 		if (ImGui::BeginTabItem("Visuals"))
 		{
-			WindowSize = { 400.f, 200.f };
+			WindowSize = { 400.f, 220.f };
 
 			ImGui::Checkbox("Esp Box", &cfg::EspBox);
 			ImGui::Checkbox("Snap Lines", &cfg::Snaplines);
@@ -97,7 +97,7 @@ bool menu::RenderMenu()
 
 		if (ImGui::BeginTabItem("Exploits"))
 		{
-			WindowSize = { 400.f, 370.f };
+			WindowSize = { 400.f, 400.f };
 
 			ImGui::Checkbox("Rapid Fire", &cfg::RapidFire);
 			ImGui::Checkbox("No Recoil", &cfg::NoRecoil);
