@@ -10,8 +10,8 @@ engine::camera hack::GetCamera(engine::vec3 Rotation)
     cam.Rotation.y = Rotation.y;
     cam.Rotation.z = 0.0f;
 
-    if (cam.Rotation.x < 0)
-        cam.Rotation.x = 360 + cam.Rotation.x;
+    //if (cam.Rotation.x < 0)
+    //    cam.Rotation.x = 360 + cam.Rotation.x;
 
     cam.FOV = 80.f;
 

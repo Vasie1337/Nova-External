@@ -87,7 +87,7 @@ bool render::CreateOverlay()
 
 bool render::Loop()
 {
-    constexpr std::chrono::milliseconds SleepTime(1);
+    constexpr std::chrono::milliseconds SleepTime(10);
 
     while (Running)
     {
@@ -118,8 +118,6 @@ bool render::Loop()
         UpdateWindow(overlay_hwnd);
 
         ImGuiIO& io = ImGui::GetIO();
-        io.DeltaTime = 1.0f / 60.0f;
-
         POINT p;
         GetCursorPos(&p);
 
