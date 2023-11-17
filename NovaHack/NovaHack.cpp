@@ -26,5 +26,7 @@ int main()
 
     render::CreateOverlay();
     render::InitDirectX();
+
+
     render::Loop();
 }
